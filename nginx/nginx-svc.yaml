@@ -4,9 +4,9 @@ metadata:
   name: nginx
 spec:
   ports:
-    - name: web
+    - name: nginx-web
       port: 8099
-      targetPort: web
+      targetPort: 80
   selector:
     app: nginx
   type: LoadBalancer
