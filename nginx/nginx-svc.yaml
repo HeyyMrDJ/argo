@@ -9,3 +9,4 @@ spec:
       targetPort: web
   selector:
     app: nginx
+  type: LoadBalancer
