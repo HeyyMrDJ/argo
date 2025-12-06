@@ -19,3 +19,16 @@ spec:
         image: nginx:1.26.1 # Uses the NGINX 1.26.1 image from Docker Hub
         ports:
         - containerPort: 80 # Exposes port 80 within the container
+
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: nginx-monitor
+  labels:
+    team: nginx
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  endpoints:
+  - port: web
