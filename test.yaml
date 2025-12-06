@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -20,6 +21,7 @@ spec:
         ports:
         - containerPort: 80 # Exposes port 80 within the container
 
+---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
