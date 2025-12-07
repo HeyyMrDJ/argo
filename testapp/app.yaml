@@ -50,6 +50,9 @@ metadata:
     prometheus: test-kube-prometheus-stack-prometheus
     release: test
 spec:
+  namespaceSelector:
+    matchNames:
+    - demo
   selector:
     matchLabels:
       app: metrics-test
