@@ -43,6 +43,11 @@ metadata:
   name: metrics-test-monitor
   labels:
     team: demo
+    app.kubernetes.io/instance: test-kube-prometheus-stack-prometheus
+    app.kubernetes.io/managed-by: prometheus-operator
+    app.kubernetes.io/name: prometheus
+    operator.prometheus.io/name: test-kube-prometheus-stack-prometheus
+    prometheus: test-kube-prometheus-stack-prometheus
 spec:
   selector:
     matchLabels:
