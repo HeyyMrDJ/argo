@@ -48,10 +48,11 @@ metadata:
     app.kubernetes.io/name: prometheus
     operator.prometheus.io/name: test-kube-prometheus-stack-prometheus
     prometheus: test-kube-prometheus-stack-prometheus
+    release: test
 spec:
   selector:
     matchLabels:
       app: metrics-test
   endpoints:
-    - port: 8080
+    - port: http
       interval: 15s
