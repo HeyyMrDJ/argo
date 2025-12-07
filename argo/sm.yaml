@@ -20,5 +20,7 @@ spec:
       app.kubernetes.io/name: argocd-server
 
   endpoints:
-    - port: http
+    - port: https
       interval: 15s
+      tlsConfig:
+        insecureSkipVerify: true
