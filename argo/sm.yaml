@@ -20,7 +20,5 @@ spec:
       app.kubernetes.io/name: argocd-server
 
   endpoints:
-    - port: https
-      interval: 15s
-      tlsConfig:
-        insecureSkipVerify: true
+  - url: http://192.168.201.106:8083/metrics
+    interval: 15s
