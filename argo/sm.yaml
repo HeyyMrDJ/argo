@@ -3,6 +3,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: argo-test-monitor
+  namespace: argocd
   labels:
     app.kubernetes.io/instance: test-kube-prometheus-stack-prometheus
     app.kubernetes.io/managed-by: prometheus-operator
