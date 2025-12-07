@@ -53,5 +53,5 @@ spec:
     matchLabels:
       app: metrics-test
   endpoints:
-    - port: http
+    - port: 8080
       interval: 15s
