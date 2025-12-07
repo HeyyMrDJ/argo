@@ -17,7 +17,7 @@ spec:
     - argocd
   selector:
     matchLabels:
-      app: argocd-server-metrics
-    endpoints:
+      app: metrics-test
+  endpoints:
     - port: http
       interval: 15s
