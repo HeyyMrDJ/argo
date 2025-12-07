@@ -21,7 +21,7 @@ spec:
 
   endpoints:
     - port: metrics  # Argo CD metrics port
-      scheme: https
+      scheme: http
       interval: 15s
       tlsConfig:
         insecureSkipVerify: true
