@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: metrics-test
-        image: prom/example-app:v0.3.0
+        image: quay.io/brancz/prometheus-example-app:v0.3.0
         ports:
         - name: http
           containerPort: 8080
