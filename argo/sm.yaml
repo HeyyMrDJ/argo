@@ -1,0 +1,22 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: argo-test-monitor
+  labels:
+    app.kubernetes.io/instance: test-kube-prometheus-stack-prometheus
+    app.kubernetes.io/managed-by: prometheus-operator
+    app.kubernetes.io/name: prometheus
+    operator.prometheus.io/name: test-kube-prometheus-stack-prometheus
+    prometheus: test-kube-prometheus-stack-prometheus
+    release: test
+spec:
+  namespaceSelector:
+    matchNames:
+    - argocd
+  selector:
+    matchLabels:
+      app: argocd-server-metrics
+      endpoints:
+    - port: http
+      interval: 15s
