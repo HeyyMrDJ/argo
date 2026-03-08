@@ -6,13 +6,16 @@ metadata:
 spec:
   project: default
 
-  source:
-    repoURL: https://prometheus-community.github.io/helm-charts
-    chart: kube-prometheus-stack
-    targetRevision: 55.5.0
-    helm:
-      valueFiles:
-        - values.yaml
+  sources:
+    - repoURL: https://prometheus-community.github.io/helm-charts
+      chart: kube-prometheus-stack
+      targetRevision: 55.5.0
+      helm:
+        valueFiles:
+          - $values/environments/homelab/prometheusgrafanastack/values.yaml
+    - repoURL: https://github.com/HeyyMrDJ/argo
+      targetRevision: main
+      ref: values
 
   destination:
     server: https://kubernetes.default.svc
