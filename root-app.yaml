@@ -7,11 +7,13 @@ spec:
   project: default
   source:
     repoURL: https://github.com/HeyyMrDJ/argo
-    targetRevision: main
+    targetRevision: HEAD
     path: environments/homelab
+    directory:
+      recurse: true
   destination:
     server: https://kubernetes.default.svc
-    namespace: default
+    namespace: argocd
   syncPolicy:
     automated:
       prune: true
