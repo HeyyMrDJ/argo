@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus-lb
+  namespace: monitoring
+spec:
+  type: LoadBalancer
+  ports:
+    - name: http
+      port: 6902
+      targetPort: 9090
+      protocol: TCP
+  selector:
+    app.kubernetes.io/name: prometheus
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana-lb
+  namespace: monitoring
+spec:
+  type: LoadBalancer
+  ports:
+    - name: http
+      port: 6903
+      targetPort: 3000
+      protocol: TCP
+  selector:
+    app.kubernetes.io/name: grafana
