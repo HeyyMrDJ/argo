@@ -1,0 +1,7 @@
+apiVersion: incus.example.com/v1alpha1
+kind: VirtualMachine
+metadata:
+  name: my-test-vm-argo1
+  namespace: default
+spec:
+  name: my-test-vm-argo1
