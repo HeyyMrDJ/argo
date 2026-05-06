@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/HeyyMrDJ/argo
     targetRevision: HEAD
-    path: environments/homelab
+    path: environments
     directory:
       recurse: true
   destination:
