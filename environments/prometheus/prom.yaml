@@ -1,0 +1,78 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kube-prometheus-stack
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default                  # Change if you have a dedicated project
+  source:
+    repoURL: https://prometheus-community.github.io/helm-charts
+    chart: kube-prometheus-stack
+    targetRevision: 84.5.0          # Latest as of May 2026
+    helm:
+      releaseName: kube-prometheus-stack
+      values: |
+        # ======================
+        # Grafana Disabled
+        # ======================
+        grafana:
+          enabled: false
+
+        # ======================
+        # Prometheus Settings
+        # ======================
+        prometheus:
+          prometheusSpec:
+            retention: 30d
+            storageSpec:
+              volumeClaimTemplate:
+                spec:
+                  accessModes: ["ReadWriteOnce"]
+                  resources:
+                    requests:
+                      storage: 50Gi
+
+        # ======================
+        # Resource limits for homelab / single-node K3s
+        # ======================
+        prometheusOperator:
+          resources:
+            limits:
+              cpu: 200m
+              memory: 300Mi
+            requests:
+              cpu: 100m
+              memory: 150Mi
+
+        # ======================
+        # K3s specific tweaks
+        # ======================
+        kubeEtcd:
+          enabled: false
+        defaultRules:
+          rules:
+            etcd: false
+
+        # ======================
+        # Cilium scraping
+        # ======================
+        extraScrapeConfigs: |
+          - job_name: cilium
+            kubernetes_sd_configs:
+              - role: pod
+            relabel_configs:
+              - source_labels: [__meta_kubernetes_pod_label_k8s_app]
+                action: keep
+                regex: cilium
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: monitoring
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true        # Very important for this chart
