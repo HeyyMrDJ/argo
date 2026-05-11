@@ -2,7 +2,7 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: blackbox-exporter
+  name: blackbox-probeme
   labels:
     release: kube-prometheus-stack # Must match Prometheus selector
 spec:
