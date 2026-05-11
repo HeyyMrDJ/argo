@@ -33,6 +33,24 @@ spec:
                   resources:
                     requests:
                       storage: 50Gi
+            additionalServiceMonitors:
+              - name: blackbox-http
+                selector:
+                  matchLabels:
+                    release: prometheus-stack # Match your release name
+                endpoints:
+                  - port: http
+                    path: /probe
+                    interval: 30s
+                    params:
+                      module: [http_2xx]
+                    relabelings:
+                      - sourceLabels: [__address__]
+                        targetLabel: __param_target
+                      - sourceLabels: [__param_target]
+                        targetLabel: instance
+                      - targetLabel: __address__
+                        replacement: prometheus-blackbox-exporter:9115 # DNS of blackbox svc
 
         # ======================
         # Resource limits for homelab / single-node K3s
@@ -45,6 +63,18 @@ spec:
             requests:
               cpu: 100m
               memory: 150Mi
+              
+        blackboxExporter:
+          enabled: true
+          # Example configuration to check HTTP endpoints
+          config:
+            modules:
+              http_2xx:
+                prober: http
+                timeout: 5s
+                http:
+                  valid_status_codes: []
+                  method: GET
 
         # ======================
         # K3s specific tweaks
