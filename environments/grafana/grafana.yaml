@@ -34,10 +34,7 @@ spec:
           image: grafana/grafana:latest
           env:
           - name: GF_SERVER_ROOT_URL
-            valueFrom:
-              secretKeyRef:
-                name: grafana-url
-                key: root-url
+            value: "TEST"
           - name: GF_SERVER_SERVE_FROM_SUB_PATH
             value: "true"
           imagePullPolicy: IfNotPresent
