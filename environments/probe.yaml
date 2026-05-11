@@ -5,7 +5,7 @@ metadata:
 spec:
   jobName: google-external
   prober:
-    url: blackbox-exporter-prometheus-blackbox-exporter.monitoring.svc.cluster.local:9115
+    url: blackbox-prometheus-blackbox-exporter.monitoring.svc.cluster.local:9115
   targets:
     staticConfig:
       static:
