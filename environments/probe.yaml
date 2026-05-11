@@ -1,1 +1,27 @@
 
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: blackbox-exporter
+  labels:
+    release: kube-prometheus-stack # Must match Prometheus selector
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: prometheus-blackbox-exporter
+  endpoints:
+    - port: http
+      path: /probe
+      params:
+        module: [http_2xx]
+      staticConfigs:
+        - targets:
+            - https://google.com
+            - http://cluster.local
+      relabelings:
+        - sourceLabels: [__address__]
+          targetLabel: __param_target
+        - sourceLabels: [__param_target]
+          targetLabel: instance
+        - targetLabel: __address__
+          replacement: prometheus-blackbox-exporter:9115
